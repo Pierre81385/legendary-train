@@ -6,6 +6,11 @@ export const QUERY_USERS = gql`
       _id
       name
       email
+      streetAddress1
+      streetAddress2
+      city
+      state
+      zipcode
     }
   }
 `;
@@ -15,6 +20,11 @@ export const QUERY_SINGLE_USER = gql`
       _id
       name
       email
+      streetAddress1
+      streetAddress2
+      city
+      state
+      zipcode
     }
   }
 `;
@@ -25,6 +35,10 @@ export const QUERY_USERBYEMAIL = gql`
       _id
       name
       email
+      streetAddress1
+      streetAddress2
+      state
+      zipcode
     }
   }
 `;

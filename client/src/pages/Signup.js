@@ -36,6 +36,11 @@ const Signup = () => {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
+    streetAddress1: "",
+    streetAddress2: "",
+    city: "",
+    state: "",
+    zipcode: "",
     password: "",
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
@@ -48,6 +53,8 @@ const Signup = () => {
       ...formState,
       [name]: value,
     });
+
+    console.log(formState);
   };
 
   // submit form
@@ -98,6 +105,51 @@ const Signup = () => {
                     type="email"
                     style={style.input}
                     value={formState.email}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className="form-input"
+                    placeholder="Address Line 1"
+                    name="streetAddress1"
+                    type="text"
+                    style={style.input}
+                    value={formState.streetAddress1}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className="form-input"
+                    placeholder="Address Line 2"
+                    name="streetAddress2"
+                    type="text"
+                    style={style.input}
+                    value={formState.streetAddress2}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className="form-input"
+                    placeholder="City"
+                    name="city"
+                    type="text"
+                    style={style.input}
+                    value={formState.city}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className="form-input"
+                    placeholder="State"
+                    name="state"
+                    type="text"
+                    style={style.input}
+                    value={formState.state}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className="form-input"
+                    placeholder="Zipcode"
+                    name="zipcode"
+                    type="number"
+                    style={style.input}
+                    value={formState.Zipcode}
                     onChange={handleChange}
                   />
                   <input

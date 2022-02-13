@@ -29,7 +29,6 @@ const Header = () => {
       top: 0,
       width: "100vw",
       zIndex: "999",
-      whiteSpace: "nowrap",
     },
   };
 
@@ -58,10 +57,12 @@ const Header = () => {
           <div>
             {!Auth.loggedIn() ? (
               <>
-                <Link style={style.firstLink} to="/login">
+                <Link style={style.firstLink} to="/list">
+                  FIND
+                </Link>
+                <Link style={style.link} to="/login">
                   LOGIN
                 </Link>
-                <span style={style.spacer}>|</span>
                 <Link style={style.link} to="/signup">
                   SIGN UP
                 </Link>
@@ -71,13 +72,9 @@ const Header = () => {
                 <Link style={style.firstLink} to="/">
                   HOME
                 </Link>
-                <span style={style.spacer}>|</span>
-
                 <Link style={style.link} to="/list">
-                  FIND GARAGE SALES
+                  FIND
                 </Link>
-                <span style={style.spacer}>|</span>
-
                 <Link style={style.link} to="/login" onClick={logout}>
                   LOGOUT
                 </Link>

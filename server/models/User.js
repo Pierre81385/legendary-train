@@ -8,7 +8,6 @@ const userSchema = new Schema({
     unique: true,
     trim: true,
   },
-
   email: {
     type: String,
     required: true,
@@ -19,6 +18,37 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minlength: 5,
+  },
+  streetAddress1: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
+  streetAddress2: {
+    type: String,
+    required: false,
+    unique: false,
+    trim: true,
+  },
+  city: {
+    type: String,
+    required: true,
+    unique: false,
+    trim: true,
+  },
+  state: {
+    type: String,
+    required: true,
+    unique: false,
+    trim: true,
+  },
+  zipcode: {
+    type: String,
+    required: true,
+    unique: false,
+    maxlength: 5,
+    trim: true,
   },
 });
 
