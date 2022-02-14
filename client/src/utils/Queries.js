@@ -42,3 +42,36 @@ export const QUERY_USERBYEMAIL = gql`
     }
   }
 `;
+
+export const QUERY_PRODUCTS = gql`
+query allProducts {
+  products {
+    _id
+    image
+    name
+    desc
+    price
+    quantity
+    user{
+      _id
+    }
+  }
+}
+`;
+
+export const QUERY_SINGLE_PRODUCT = gql`
+  query Product($productId: ID!) {
+    product(productId: $productId) {
+      _id
+      image
+      name
+      desc
+      price
+      quantity
+      user{
+        _id
+      }
+    }
+  }
+`;
+

@@ -34,7 +34,7 @@ const Header = () => {
 
   const logout = (event) => {
     event.preventDefault();
-
+    localStorage.clear();
     Auth.logout();
     setLoginStatus(false);
     handleClick();

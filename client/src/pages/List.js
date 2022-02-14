@@ -8,6 +8,7 @@ import { QUERY_USERS } from "../utils/Queries";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import Auth from "../utils/Auth";
+import { useHistory } from "react-router-dom";
 
 const List = () => {
   const style = {
@@ -54,6 +55,8 @@ const List = () => {
     console.log(`Re-rendered ${count} times`);
   });
 
+  const history = useHistory();
+
   const renderList = (user) => {
     return (
       <Card className="border-success" style={style.card} key={user.id}>
@@ -83,7 +86,14 @@ const List = () => {
           </a>
         </Card.Text>
         <Card.Footer>
-          <Button id="addCart" variant="success" onClick={() => {}}>
+          <Button
+            id="addCart"
+            variant="success"
+            onClick={() => {
+              localStorage.setItem("id", user._id);
+              history.push("/catalog");
+            }}
+          >
             VIEW
           </Button>
         </Card.Footer>
