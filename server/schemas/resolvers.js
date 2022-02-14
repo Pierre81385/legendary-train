@@ -81,7 +81,7 @@ const resolvers = {
       // user.product.push(createdProduct._id);
 
       await currentUser.save();
-      return { createdProduct };
+      return { product };
     },
 
     login: async (parent, { email, password }) => {

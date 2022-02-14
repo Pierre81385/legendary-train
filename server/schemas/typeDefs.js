@@ -2,26 +2,26 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
-    _id: ID!
-    name: String!
-    email: String!
-    password: String!
-    streetAddress1: String!
+    _id: ID
+    name: String
+    email: String
+    password: String
+    streetAddress1: String
     streetAddress2: String
-    city: String!
-    state: String!
-    zipcode: String!
-    products: [Product!]!
+    city: String
+    state: String
+    zipcode: String
+    products: [Product]
   }
 
   type Product {
-    _id: ID!
+    _id: ID
     image: String
-    name: String!
-    desc: String!
-    price: Int!
-    quantity: Int!
-    user: User!
+    name: String
+    desc: String
+    price: Int
+    quantity: Int
+    user: User
   }
 
   type Auth {
@@ -50,7 +50,7 @@ const typeDefs = gql`
     ): Auth
 
     addProduct(
-      image: String
+      image: String!
       name: String!
       desc: String!
       price: String!
