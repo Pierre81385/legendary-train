@@ -50,6 +50,10 @@ const userSchema = new Schema({
     maxlength: 5,
     trim: true,
   },
+  product: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Product'
+  }]
 });
 
 userSchema.pre("save", async function (next) {

@@ -30,6 +30,14 @@ export const ADD_USER = gql`
   }
 `;
 
+export const DELETE_USER = gql`
+  mutation deleteUser($email: String!) {
+    deleteUser(email: $email) {
+      email
+    }
+  }
+`;
+
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -42,10 +50,26 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const DELETE_USER = gql`
-  mutation deleteUser($email: String!) {
-    deleteUser(email: $email) {
-      email
+export const ADD_PRODUCT = gql`
+  mutation addProduct(
+    $image: String
+    $name: String!
+    $desc: String!
+    $price: String!
+    $quantity: String!
+  ) {
+    addProduct(
+      image: $image
+      name: $name
+      desc: $desc
+      price: $price
+      quantity: $quantity
+    ) {
+      image
+      name
+      desc
+      price
+      quantity
     }
   }
 `;

@@ -2,8 +2,9 @@ const {
   ProvidedRequiredArgumentsOnDirectivesRule,
 } = require("graphql/validation/rules/ProvidedRequiredArgumentsRule");
 const { User } = require("../models");
-const { findById } = require("../models/User");
+const { Product } = require("../models");
 const { signToken } = require("../utils/auth");
+const mongoose = require("../node_modules/mongoose");
 
 const resolvers = {
   Query: {
@@ -15,6 +16,9 @@ const resolvers = {
     },
     userByEmail: async (parent, { userEmail }) => {
       return User.findOne({ email: userEmail });
+    },
+    product: async (parent, { productId }) => {
+      return Product.findOne({ _id: productId });
     },
   },
 
@@ -48,6 +52,38 @@ const resolvers = {
       // Return an `Auth` object that consists of the signed token and user's information
       return { token, user };
     },
+    addProduct: async (
+      parent,
+      { image, name, desc, price, quantity, user: userId }
+    ) => {
+      // Create product
+      const product = await Product.create({
+        image,
+        name,
+        desc,
+        price,
+        quantity,
+        user: userId,
+      });
+
+      const currentUser = await User.findById(mongoose.Types.ObjectId(userId));
+
+      console.log(currentUser);
+
+      const createdProduct = await product.save();
+
+      console.log(createdProduct);
+
+      currentUser.product.push(createdProduct._id);
+
+      //const user = await User.findById(mongoose.Types.ObjectId(userId));
+      // console.log(user);
+      // user.product.push(createdProduct._id);
+
+      await currentUser.save();
+      return { createdProduct };
+    },
+
     login: async (parent, { email, password }) => {
       // Look up the user by the provided email address. Since the `email` field is unique, we know that only one person will exist with that email
       const user = await User.findOne({ email });
