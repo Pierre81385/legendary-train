@@ -20,6 +20,8 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Catalog from "./pages/Catalog";
 import List from "./pages/List";
+import AddProduct from "./pages/AddProduct";
+import UpdateProduct from "./pages/UpdateProduct";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -93,6 +95,12 @@ function App() {
               </Route>
               <Route exact path="/list">
                 <List />
+              </Route>
+              <Route exact path="/addproduct">
+                <AddProduct />
+              </Route>
+              <Route exact path="/updateproduct">
+                <UpdateProduct />
               </Route>
             </Col>
           </Row>

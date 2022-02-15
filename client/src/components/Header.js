@@ -75,6 +75,9 @@ const Header = () => {
                 <Link style={style.link} to="/list">
                   FIND
                 </Link>
+                <Link style={style.link} to="/addproduct">
+                  POST
+                </Link>
                 <Link style={style.link} to="/login" onClick={logout}>
                   LOGOUT
                 </Link>

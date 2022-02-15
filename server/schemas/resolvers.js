@@ -4,6 +4,8 @@ const {
 const { User } = require("../models");
 const { Product } = require("../models");
 const { signToken } = require("../utils/auth");
+const { findById } = require("../models/User");
+
 const mongoose = require("../node_modules/mongoose");
 
 const resolvers = {
@@ -111,11 +113,46 @@ const resolvers = {
       // Return an `Auth` object that consists of the signed token and user's information
       return { token, user };
     },
+    deleteProduct: async (parent, args) => {
+      const { name } = args;
+      console.log("Product " + name + " deleted");
+      await Product.findOneAndRemove({ name: name });
+    },
 
     deleteUser: async (parent, args) => {
       const { email } = args;
       console.log("User with email " + email + " deleted.");
       await User.findOneAndRemove({ email: email });
+    },
+
+    updateProduct: async (
+      parent,
+      { image, name, desc, price, quantity, user }
+    ) => {
+      const prod = Product.findOneAndUpdate(
+        { name: name },
+        {
+          image,
+          name,
+          desc,
+          price,
+          quantity,
+          user,
+        },
+        { new: true }
+      );
+      console.log("Product " + prod.name + " found!");
+      if (!prod) {
+        throw new Error("Could not find product with name: " + name);
+      }
+      prod.image = image;
+      prod.name = name;
+      prod.desc = desc;
+      prod.price = price;
+      prod.quantity = quantity;
+      prod.user = user;
+
+      return prod;
     },
   },
 };

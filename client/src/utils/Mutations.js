@@ -52,11 +52,12 @@ export const LOGIN_USER = gql`
 
 export const ADD_PRODUCT = gql`
   mutation addProduct(
-    $image: String
+    $image: String!
     $name: String!
     $desc: String!
     $price: String!
     $quantity: String!
+    $user: String!
   ) {
     addProduct(
       image: $image
@@ -64,12 +65,54 @@ export const ADD_PRODUCT = gql`
       desc: $desc
       price: $price
       quantity: $quantity
+      user: $user
     ) {
       image
       name
       desc
       price
       quantity
+      user {
+        _id
+      }
+    }
+  }
+`;
+
+export const DELETE_PRODUCT = gql`
+  mutation deleteProduct($name: String!) {
+    deleteProduct(name: $name) {
+      name
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT = gql`
+  mutation updateProduct(
+    $image: String!
+    $name: String!
+    $desc: String!
+    $price: String!
+    $quantity: String!
+    $user: String!
+  ) {
+    updateProduct(
+      image: $image
+      name: $name
+      desc: $desc
+      price: $price
+      quantity: $quantity
+      user: $user
+    ) {
+      _id
+      image
+      name
+      desc
+      price
+      quantity
+      user {
+        _id
+      }
     }
   }
 `;

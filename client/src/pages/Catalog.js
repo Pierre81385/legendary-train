@@ -2,13 +2,28 @@
 import React, { useState, useEffect, initialState } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { QUERY_PRODUCTS, QUERY_USERBYEMAIL } from "../utils/Queries";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../utils/Auth";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { DELETE_PRODUCT } from "../utils/Mutations";
 
 const Catalog = () => {
-  const style = {};
+  const style = {
+    card: {
+      marginRight: "auto",
+      marginLeft: "auto",
+      marginTop: "25px",
+      marginBottom: "25px",
+      boxShadow: "0 15px 25px rgba(129, 124, 124, 0.2)",
+      borderRadius: "5px",
+      padding: "10px",
+      textAlign: "center",
+      //width: "33%",
+      borderColor: "green",
+      color: "black",
+    },
+  };
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
   const product = data?.products || {};
@@ -26,31 +41,88 @@ const Catalog = () => {
     }
   }
 
+  const [deleteProduct] = useMutation(DELETE_PRODUCT, {
+    refetchQueries: [{ query: QUERY_PRODUCTS }],
+  });
+
   const renderCard = (oneProduct) => {
     return (
-      <Col>
-        <Card style={style.card} key={oneProduct.id}>
-          <Card.Img
-            variant="top"
-            src={oneProduct.image}
-            className="img-responsive center-block"
-          />
-          <Card.Body>
-            <Card.Title>{oneProduct.name}</Card.Title>
-            <Card.Text>{oneProduct.desc}</Card.Text>
-            <p>${oneProduct.price}</p>
-            <p>Quantity Availible: {oneProduct.quantity}</p>
-          </Card.Body>
-        </Card>
-      </Col>
+      <Card style={style.card} key={oneProduct.id}>
+        <Card.Img
+          variant="top"
+          src={oneProduct.image}
+          className="img-responsive center-block"
+        />
+        <Card.Body>
+          <Card.Title>{oneProduct.name}</Card.Title>
+          <Card.Text>{oneProduct.desc}</Card.Text>
+
+          <p>${oneProduct.price}</p>
+          <p>Quantity Availible: {oneProduct.quantity}</p>
+        </Card.Body>
+        <Card.Footer className="text-center" style={{ paddingTop: "10px" }}>
+          {oneProduct.user._id != localStorage.getItem("currentId") ? (
+            <>
+              <Link className="btn btn-outline-dark" to="/login">
+                Login to Change
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                className="btn btn-outline-dark"
+                style={style.link}
+                to="/updateproduct"
+                onClick={() => {
+                  console.log(typeof oneProduct._id);
+                  //save name of product to be updated to local storage.
+                  localStorage.setItem("idOfUpdateProduct", oneProduct._id);
+
+                  localStorage.setItem(
+                    "imageOfUpdateProduct",
+                    oneProduct.image
+                  );
+                  localStorage.setItem("nameOfUpdateProduct", oneProduct.name);
+                  localStorage.setItem("descOfUpdateProduct", oneProduct.desc);
+                  localStorage.setItem(
+                    "priceOfUpdateProduct",
+                    oneProduct.price
+                  );
+                  localStorage.setItem(
+                    "quantityOfUpdateProduct",
+                    oneProduct.quantity
+                  );
+                }}
+              >
+                Update
+              </Link>
+              <Button
+                variant="outline-dark"
+                style={style.button}
+                onClick={() => {
+                  deleteProduct({ variables: { name: oneProduct.name } });
+                }}
+              >
+                Delete
+              </Button>
+            </>
+          )}
+        </Card.Footer>
+      </Card>
     );
   };
 
   return (
     <div style={{ maxWidth: "100vw", overflowX: "hidden" }}>
       <Container style={style.container} fluid>
-        <Row xs={1} sm={2} md={3} className="g-4">
-          {productArray.map(renderCard)}
+        <Row style={{ height: "33vh" }}></Row>
+
+        <Row>
+          <Col className="col-1 col-sm-2 col-md-4"></Col>
+          <Col className="col-10 col-sm-8 col-md-4">
+            {productArray.map(renderCard)}
+          </Col>
+          <Col className="col-1 col-sm-2 col-md-4"></Col>
         </Row>
       </Container>
     </div>

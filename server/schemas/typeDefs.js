@@ -60,7 +60,18 @@ const typeDefs = gql`
 
     login(email: String!, password: String!): Auth
 
+    deleteProduct(name: String!): Product
+
     deleteUser(email: String!): User
+
+    updateProduct(
+      image: String!
+      name: String!
+      desc: String!
+      price: String!
+      quantity: String!
+      user: String!
+    ): Product
   }
 `;
 

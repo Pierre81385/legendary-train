@@ -54,7 +54,7 @@ const Login = (props) => {
         variables: { ...formState },
       });
 
-      //localStorage.setItem("id", data.login.user._id);
+      localStorage.setItem("currentId", data.login.user._id);
 
       localStorage.setItem("email", formState.email);
 
