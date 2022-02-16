@@ -7,6 +7,7 @@ import Auth from "../utils/Auth";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { DELETE_PRODUCT } from "../utils/Mutations";
+import Note from "../assets/note.png";
 
 const Catalog = () => {
   const style = {
@@ -19,9 +20,18 @@ const Catalog = () => {
       borderRadius: "5px",
       padding: "10px",
       textAlign: "center",
-      //width: "33%",
-      borderColor: "green",
-      color: "black",
+      backdropFilter: "blur(2px)",
+      borderColor: "white",
+      color: "white",
+      backgroundColor: "rgba(0, 0, 0, 0.2)",
+    },
+    button: {
+      marginLeft: "5px",
+      marginRight: "5px",
+    },
+    row: {
+      display: "flex",
+      flexDirection: "row",
     },
   };
 
@@ -51,8 +61,10 @@ const Catalog = () => {
         <Card.Img
           variant="top"
           src={oneProduct.image}
+          style={style.img}
           className="img-responsive center-block"
         />
+
         <Card.Body>
           <Card.Title>{oneProduct.name}</Card.Title>
           <Card.Text>{oneProduct.desc}</Card.Text>
@@ -63,15 +75,15 @@ const Catalog = () => {
         <Card.Footer className="text-center" style={{ paddingTop: "10px" }}>
           {oneProduct.user._id != localStorage.getItem("currentId") ? (
             <>
-              <Link className="btn btn-outline-dark" to="/login">
+              <Link className="btn btn-outline-light" to="/login">
                 Login to Change
               </Link>
             </>
           ) : (
             <>
               <Link
-                className="btn btn-outline-dark"
-                style={style.link}
+                className="btn btn-outline-light"
+                style={style.button}
                 to="/updateproduct"
                 onClick={() => {
                   console.log(typeof oneProduct._id);
@@ -97,7 +109,7 @@ const Catalog = () => {
                 Update
               </Link>
               <Button
-                variant="outline-dark"
+                variant="outline-light"
                 style={style.button}
                 onClick={() => {
                   deleteProduct({ variables: { name: oneProduct.name } });

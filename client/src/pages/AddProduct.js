@@ -29,6 +29,10 @@ const AddProduct = () => {
       margin: "0 auto",
       float: "none",
       marginBottom: "10px",
+      backdropFilter: "blur(2px)",
+      backgroundColor: "rgba(0, 0, 0, 0.2)",
+
+      borderColor: "white",
     },
     button: {
       marginLeft: "10px",
@@ -105,8 +109,8 @@ const AddProduct = () => {
       <Row>
         <Col className="col-sm-1 col-md-2 col-lg-4"></Col>
         <Col className="col-12 col-sm-10 col-md-8 col-lg-4" align="center">
-          <div className="card">
-            <h4 className="card-header bg-dark text-light p-2">Add Product</h4>
+          <div className="card" style={style.card}>
+            <h4 className="card-header text-light p-2">Add Product</h4>
             <img src={formState.image} style={style.img}></img>
             <div className="card-body" style={style.container}>
               {data ? (
@@ -116,6 +120,15 @@ const AddProduct = () => {
                 </p>
               ) : (
                 <form onSubmit={handleFormSubmit}>
+                  {/* <label for="imageFile">Upload a photo of yourself:</label>
+                  <input
+                    type="file"
+                    id="imageFile"
+                    //value={formState.image}
+                    //onChange={handleImage}
+                    capture="environment"
+                    accept="image/*"
+                  ></input> */}
                   <input
                     className="form-input"
                     placeholder="Image URL, sucessful link will display an image preview"
@@ -162,14 +175,14 @@ const AddProduct = () => {
                     onChange={handleChange}
                   />
                   <Button
-                    variant="outline-dark"
+                    variant="outline-light"
                     style={{ cursor: "pointer" }}
                     type="submit"
                   >
                     Upload to Database
                   </Button>
                   <Link
-                    className="btn btn-outline-dark"
+                    className="btn btn-outline-light"
                     style={style.button}
                     to="/"
                   >

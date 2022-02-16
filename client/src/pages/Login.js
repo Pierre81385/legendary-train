@@ -21,7 +21,7 @@ const Login = (props) => {
     },
     card: {
       backdropFilter: "blur(2px)",
-      backgroundColor: "rgba(0, 0, 0, 0)",
+      backgroundColor: "rgba(0, 0, 0, 0.2)",
       borderColor: "white",
     },
     button: {

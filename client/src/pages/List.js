@@ -21,9 +21,26 @@ const List = () => {
       borderRadius: "5px",
       padding: "10px",
       textAlign: "center",
-      //width: "33%",
-      borderColor: "green",
-      color: "black",
+      backdropFilter: "blur(2px)",
+      backgroundColor: "rgba(0, 0, 0, 0.2)",
+      borderColor: "white",
+      color: "white",
+    },
+    link2: {
+      color: "white",
+    },
+    mapouter: {
+      position: "relative",
+      textAlign: "right",
+      height: "50%",
+      width: "100%",
+    },
+    gmap_canvas: {
+      overflow: "hidden",
+      background: "none!important",
+      height: "50%",
+      width: "100%",
+      textAlign: "center",
     },
   };
 
@@ -57,10 +74,32 @@ const List = () => {
 
   const history = useHistory();
 
+  const mkAddress = (u) => {
+    var address = `${u.streetAddress1} ${u.city} ${u.state} ${u.zipcode}`;
+    console.log(encodeURI(address));
+    return encodeURI(address);
+  };
+
   const renderList = (user) => {
     return (
-      <Card className="border-success" style={style.card} key={user.id}>
-        <Card.Title>{user.name}</Card.Title>
+      <Card style={style.card} key={user.id}>
+        <Card.Title>{user.name}'s Yard Sale</Card.Title>
+        <div style={style.mapouter}>
+          <div style={style.gmap_canvas}>
+            <iframe
+              width="600"
+              height="500"
+              id="gmap_canvas"
+              src={`https://maps.google.com/maps?q=${mkAddress(
+                user
+              )}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
+              frameborder="0"
+              scrolling="no"
+              marginheight="0"
+              marginwidth="0"
+            ></iframe>
+          </div>
+        </div>
         <Card.Text>
           Address: {user.streetAddress1}
           <span> </span>
@@ -72,6 +111,7 @@ const List = () => {
           <span> </span>
           {user.zipcode}
         </Card.Text>
+
         <Card.Text>
           Email:
           <span> </span>
@@ -88,7 +128,7 @@ const List = () => {
         <Card.Footer>
           <Button
             id="addCart"
-            variant="success"
+            variant="outline-light"
             onClick={() => {
               localStorage.setItem("id", user._id);
               history.push("/catalog");
