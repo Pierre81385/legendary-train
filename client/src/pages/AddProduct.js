@@ -44,6 +44,9 @@ const AddProduct = () => {
       marginLeft: "auto",
       marginRight: "auto",
     },
+    label: {
+      color: "white",
+    },
   };
 
   //Setting input form to have blank values.
@@ -120,15 +123,10 @@ const AddProduct = () => {
                 </p>
               ) : (
                 <form onSubmit={handleFormSubmit}>
-                  {/* <label for="imageFile">Upload a photo of yourself:</label>
-                  <input
-                    type="file"
-                    id="imageFile"
-                    //value={formState.image}
-                    //onChange={handleImage}
-                    capture="environment"
-                    accept="image/*"
-                  ></input> */}
+                  <label style={style.label}>
+                    * copy the image address of pictures you find online. User
+                    image upload not yet supported
+                  </label>
                   <input
                     className="form-input"
                     placeholder="Image URL, sucessful link will display an image preview"
