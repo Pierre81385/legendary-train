@@ -67,7 +67,7 @@ const Signup = () => {
         variables: { ...formState },
       });
 
-      Auth.login(data.addUser.token);
+      //Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
@@ -84,8 +84,7 @@ const Signup = () => {
             <div className="card-body" style={style.container}>
               {data ? (
                 <p>
-                  Success! You may now head{" "}
-                  <Link to="/shop">back to the homepage.</Link>
+                  Success! You may now <Link to="/shop">login.</Link>
                 </p>
               ) : (
                 <Form onSubmit={handleFormSubmit}>
