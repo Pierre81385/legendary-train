@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Auth from "../utils/Auth";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Button } from "react-bootstrap";
 
 const Header = () => {
   const style = {
@@ -19,16 +19,29 @@ const Header = () => {
       marginLeft: "15px",
       marginRight: "15px",
       textDecoration: "none",
-      color: "white",
+      color: "black",
     },
     spacer: {
       color: "white",
     },
     header: {
+      justifyContent: "center",
       position: "fixed",
       top: 0,
       width: "100vw",
       zIndex: "999",
+      backdropFilter: "blur(2px)",
+      backgroundColor: "rgba(0, 0, 0, 0.2)",
+      margin: 0,
+    },
+    h1: {
+      fontFamily: "'Finger Paint', cursive",
+      fontSize: "80px",
+      color: "white",
+    },
+    button: {
+      marginLeft: "15px",
+      marginRight: "15px",
     },
   };
 
@@ -54,39 +67,87 @@ const Header = () => {
       <Row>
         <Col className="col-1"></Col>
         <Col className="col-10" align="center">
-          <div>
+          <div style={style.nav}>
             {!Auth.loggedIn() ? (
               <>
-                <Link style={style.firstLink} to="/list">
+                <Button
+                  id="findNav"
+                  variant="outline-light"
+                  style={style.button}
+                  onClick={() => {
+                    history.push("/list");
+                  }}
+                >
                   FIND
-                </Link>
-                <Link style={style.link} to="/login">
+                </Button>
+                <Button
+                  id="loginNav"
+                  variant="outline-light"
+                  style={style.button}
+                  onClick={() => {
+                    history.push("/login");
+                  }}
+                >
                   LOGIN
-                </Link>
-                <Link style={style.link} to="/signup">
-                  SIGN UP
-                </Link>
+                </Button>
+                <Button
+                  id="signUpNav"
+                  variant="outline-light"
+                  style={style.button}
+                  onClick={() => {
+                    history.push("/signup");
+                  }}
+                >
+                  SIGNUP
+                </Button>
               </>
             ) : (
               <>
-                <Link style={style.firstLink} to="/">
+                <Button
+                  id="homeNav"
+                  variant="outline-light"
+                  style={style.button}
+                  onClick={() => {
+                    history.push("/");
+                  }}
+                >
                   HOME
-                </Link>
-                <Link style={style.link} to="/list">
+                </Button>
+                <Button
+                  id="findNav"
+                  variant="outline-light"
+                  style={style.button}
+                  onClick={() => {
+                    history.push("/list");
+                  }}
+                >
                   FIND
-                </Link>
-                <Link style={style.link} to="/addproduct">
+                </Button>
+                <Button
+                  id="addNav"
+                  variant="outline-light"
+                  style={style.button}
+                  onClick={() => {
+                    history.push("/addproduct");
+                  }}
+                >
                   POST
-                </Link>
-                <Link style={style.link} to="/login" onClick={logout}>
+                </Button>
+                <Button
+                  id="logoutNav"
+                  variant="outline-light"
+                  style={style.button}
+                  onClick={logout}
+                >
                   LOGOUT
-                </Link>
+                </Button>
               </>
             )}
           </div>
         </Col>
         <Col className="col-1"></Col>
       </Row>
+      <h1 style={style.h1}>YARDSALE</h1>
     </header>
   );
 };

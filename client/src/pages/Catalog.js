@@ -7,7 +7,6 @@ import Auth from "../utils/Auth";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { DELETE_PRODUCT } from "../utils/Mutations";
-import Note from "../assets/note.png";
 
 const Catalog = () => {
   const style = {

@@ -10,7 +10,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { classes } from "istanbul-lib-coverage";
-import mainBackground from "../src/assets/mainBackground.mp4";
+import mainBackground from "../src/assets/grass.mp4";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -60,12 +60,10 @@ function App() {
     },
   };
 
-  
-
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Container fluid>
+        <Container fluid style={style.img}>
           <video
             autoPlay="autoplay"
             loop="loop"

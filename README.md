@@ -1,3 +1,21 @@
+# About Legemdary-Train
+
+The goal of this app was to create a space where people could easily list items they'd have availible at their yard sale, so people could see if it's worth going to for what they want.  This way, if you were putting up posters about your yard sale, you could also include an easy URL for people to visit ahead of time.
+
+This is also a demonstration of creating an app with CRUD funtionality, creating document relationships in the database, and utilizing these relationships to selectively display content and functionality.  When a user is logged in for instance, they can view every yard sale, but their postings are tied to their user ID, and only they have the functionality to update or delete items associated with their user ID.  
+
+# to-do/wish list:
+
+- Add a name!
+- Create an image upload form, and store those images on the server for both profile picture and item pictures.
+- Make the list of yard sales searchable by name
+- Make the list of yard sales filterable by distance from the logged in users address
+- Add a QR code, either for the site in general, or generate ones that direct people to specific users catalogs.
+- UPDATE functionality for the user information
+- Improve the layout.  Specifically I'd like the cards in the catalog to arrange more like Instagram
+- To that end, possible re-style the cards so just the picture shows, and then on hover the item details show overlayed.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
